@@ -26,6 +26,10 @@ logs/
 # Traefik
 traefik/acme/
 
+# Claude Code (local settings only, keep CLAUDE.md)
+.claude/
+**/.claude/
+
 # OS
 .DS_Store
 Thumbs.db

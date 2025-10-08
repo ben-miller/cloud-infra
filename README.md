@@ -46,18 +46,21 @@ A complete local monitoring and observability stack using Docker, Traefik, and m
 | Grafana | http://grafana.home.local | Metrics visualization |
 | Loki | http://loki.home.local | Log aggregation |
 | Uptime Kuma | http://uptime.home.local | Uptime monitoring |
+| Immich | http://photos.home.local | Self-hosted photo management |
 
 ## Directory Structure
 
 ```
 .
 ├── traefik/           # Reverse proxy & routing
+├── dnsmasq/           # Local DNS (*.home.local)
 ├── homepage/          # Dashboard & service directory
 ├── prometheus/        # Metrics collection
 ├── grafana/          # Visualization & dashboards
 ├── loki/             # Log aggregation
 ├── promtail/         # Log shipping
 ├── uptime-kuma/      # Uptime monitoring
+├── immich/            # Photo management
 ├── docker-compose.yml # Shared network definition
 ├── .env.example      # Environment template
 └── README.md         # This file
@@ -83,6 +86,7 @@ Edit `/etc/hosts` (macOS/Linux) or `C:\Windows\System32\drivers\etc\hosts` (Wind
 127.0.0.1 grafana.home.local
 127.0.0.1 loki.home.local
 127.0.0.1 uptime.home.local
+127.0.0.1 photos.home.local
 ```
 
 ### Option B: dnsmasq (Wildcard DNS)

@@ -17,6 +17,8 @@ prometheus/data/
 grafana/data/
 loki/data/
 uptime-kuma/data/
+immich/library/
+immich/postgres/
 
 # Logs
 *.log

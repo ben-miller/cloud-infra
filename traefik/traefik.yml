@@ -10,6 +10,11 @@ api:
 entryPoints:
   web:
     address: ":80"
+    transport:
+      respondingTimeouts:
+        readTimeout: 600s
+        idleTimeout: 600s
+        writeTimeout: 600s
     # Uncomment to redirect HTTP to HTTPS
     # http:
     #   redirections:

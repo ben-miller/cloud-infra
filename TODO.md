@@ -19,7 +19,8 @@
 ├── grafana/
 ├── loki/
 ├── promtail/
-└── uptime-kuma/
+├── uptime-kuma/
+└── immich/
 ```
 
 ---
@@ -62,6 +63,7 @@
   127.0.0.1 prometheus.home.local
   127.0.0.1 loki.home.local
   127.0.0.1 uptime.home.local
+  127.0.0.1 photos.home.local
   ```
 - [ ] Document hosts file changes in root README
 
@@ -208,7 +210,70 @@
 
 ---
 
-## Phase 8: Integration & Documentation
+## Phase 8: Immich Photos Setup
+
+### 7.1 Immich Directory Setup
+- [ ] Create `immich/` directory
+- [ ] Download official docker-compose.yml from Immich releases
+- [ ] Download example .env file from Immich releases
+- [ ] Create `immich/README.md`
+
+### 7.2 Immich Configuration
+- [ ] Configure `.env` file:
+  - [ ] Set `UPLOAD_LOCATION` for photo storage (e.g., `./library`)
+  - [ ] Set `DB_DATA_LOCATION` for postgres data (e.g., `./postgres`)
+  - [ ] Set `TZ` timezone variable
+  - [ ] Set `IMMICH_VERSION=release`
+  - [ ] Set `DB_PASSWORD` (use only A-Za-z0-9 characters)
+- [ ] Add upload location and postgres data to `.gitignore`
+- [ ] Update Traefik timeout settings in `traefik/traefik.yml`:
+  - [ ] Set readTimeout to 600s (10 min for large uploads)
+  - [ ] Set idleTimeout to 600s
+  - [ ] Set writeTimeout to 600s
+
+### 7.3 Immich Docker Compose Integration
+- [ ] Add Traefik labels to immich-server service:
+  - [ ] `traefik.enable=true`
+  - [ ] `traefik.http.routers.immich.rule=Host(\`photos.home.local\`)`
+  - [ ] `traefik.http.routers.immich.entrypoints=web`
+  - [ ] `traefik.http.services.immich.loadbalancer.server.port=2283`
+- [ ] Add immich-server to monitoring-network (external network)
+- [ ] Verify services in docker-compose.yml:
+  - [ ] immich-server (main web service)
+  - [ ] immich-machine-learning (ML features)
+  - [ ] redis (valkey/redis for caching)
+  - [ ] database (postgres with vector extensions)
+- [ ] Verify volumes are properly configured:
+  - [ ] Upload location mounted to /data
+  - [ ] Postgres data persisted
+  - [ ] Model cache for ML service
+
+### 7.4 Immich Deployment & Testing
+- [ ] Start Immich stack: `cd immich && docker-compose up -d`
+- [ ] Verify all 4 containers are healthy
+- [ ] Access Immich at `http://photos.home.local`
+- [ ] Complete initial setup wizard
+- [ ] Register admin user account
+- [ ] Test photo upload functionality
+- [ ] Verify ML service is processing images
+
+### 7.5 Immich Integration with Monitoring Stack
+- [ ] Add Immich to Homepage dashboard at `http://photos.home.local`
+- [ ] Add Uptime Kuma HTTP monitor for `http://photos.home.local`
+- [ ] Configure Uptime Kuma check interval (60s recommended)
+- [ ] Document mobile app connection in `immich/README.md`
+
+### 7.6 Immich Backup Strategy
+- [ ] Document backup requirements in `immich/README.md`:
+  - [ ] Photos stored in `${UPLOAD_LOCATION}` (critical - manual backup required)
+  - [ ] Postgres database in `${DB_DATA_LOCATION}` (user metadata)
+  - [ ] Machine learning model cache (can be regenerated)
+- [ ] Add backup reminder: Database contains only metadata, photos are the source of truth
+- [ ] Test restore procedure for both photos and database
+
+---
+
+## Phase 9: Integration & Documentation
 
 ### 7.1 Service Integration
 - [ ] Add all services to Homepage dashboard with `.local` URLs
@@ -311,6 +376,7 @@ docker-compose up -d --force-recreate
 | Uptime Kuma | http://uptime.local | 3001 |
 | Prometheus | http://prometheus.local | 9090 |
 | Loki | http://loki.local | 3100 |
+| Immich Photos | http://photos.home.local | 2283 |
 
 **Without Traefik (fallback):**
 | Service | Port | URL |

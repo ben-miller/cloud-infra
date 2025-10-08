@@ -85,10 +85,11 @@ When suggesting solutions, always consider:
 
 ### After Implementation
 1. Verify the change worked
-2. Update documentation
+2. Update documentation (README.md)
 3. Add/update monitoring
 4. Clean up temporary resources
 5. Review cost impact
+6. Check off the completed items in TODO.md
 
 ## Code Quality Standards
 

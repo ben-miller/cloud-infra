@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/bmiller/src/cloud-infra status)",
+      "Bash(git -C /Users/bmiller/src/cloud-infra add .gitignore README.md .env.example docker-compose.yml)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

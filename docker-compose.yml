@@ -1,0 +1,10 @@
+version: '3.8'
+
+# Root docker-compose.yml
+# Purpose: Define shared network for all monitoring services
+# All services will connect to this network for inter-service communication
+
+networks:
+  monitoring-network:
+    name: ${NETWORK_NAME:-monitoring-network}
+    driver: bridge

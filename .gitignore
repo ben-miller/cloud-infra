@@ -1,0 +1,40 @@
+# Environment variables
+.env
+*.env
+!.env.example
+
+# Secrets
+secrets/
+*.key
+*.pem
+*.crt
+acme.json
+
+# Data volumes
+*/data/
+*/volumes/
+prometheus/data/
+grafana/data/
+loki/data/
+uptime-kuma/data/
+
+# Logs
+*.log
+logs/
+*/logs/
+
+# Traefik
+traefik/acme/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backups
+*.backup
+backups/
+
+# Temporary files
+*.tmp
+*.swp
+*~

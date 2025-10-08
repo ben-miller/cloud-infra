@@ -27,16 +27,16 @@
 ## Phase 2: Traefik Setup (Reverse Proxy & DNS)
 
 ### 2.1 Traefik Core Configuration
-- [ ] Create `traefik/` directory
-- [ ] Create `traefik/docker-compose.yml`
-- [ ] Create `traefik/traefik.yml` (static configuration)
-- [ ] Create `traefik/dynamic/` directory for dynamic configs
-- [ ] Create `traefik/acme/` directory for certificates (if using HTTPS)
-- [ ] Create `traefik/README.md`
-- [ ] Enable Docker provider
-- [ ] Enable dashboard on `traefik.local`
-- [ ] Configure entry points (http on :80)
-- [ ] Set up access logs (optional)
+- [x] Create `traefik/` directory
+- [x] Create `traefik/docker-compose.yml`
+- [x] Create `traefik/traefik.yml` (static configuration)
+- [x] Create `traefik/dynamic/` directory for dynamic configs
+- [x] Create `traefik/acme/` directory for certificates (if using HTTPS)
+- [x] Create `traefik/README.md`
+- [x] Enable Docker provider
+- [x] Enable dashboard on `traefik.home.local`
+- [x] Configure entry points (http on :80)
+- [x] Set up access logs (optional - config included)
 
 ### 2.2 Local DNS Setup (Choose One Method)
 

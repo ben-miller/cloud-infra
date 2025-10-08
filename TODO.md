@@ -3,16 +3,16 @@
 ## Phase 1: Repository Structure & Foundation
 
 ### 1.1 Initialize Main Repository
-- [ ] Create root `.gitignore` (ignore secrets, logs, data volumes)
-- [ ] Create root `README.md` with architecture overview
-- [ ] Create `.env.example` for shared environment variables
-- [ ] Create `docker-compose.yml` in root for network definition
-- [ ] Define shared Docker network (e.g., `monitoring-network`)
-- [ ] Add local domain suffix to `.env` (e.g., `DOMAIN=local`)
+- [x] Create root `.gitignore` (ignore secrets, logs, data volumes)
+- [x] Create root `README.md` with architecture overview
+- [x] Create `.env.example` for shared environment variables
+- [x] Create `docker-compose.yml` in root for network definition
+- [x] Define shared Docker network (e.g., `monitoring-network`)
+- [x] Add local domain suffix to `.env` (e.g., `DOMAIN=local`)
 
 ### 1.2 Create Subdirectories for Each Service
+- [x] Create service directories:
 ```
-monitoring/
 ├── traefik/
 ├── homepage/
 ├── prometheus/

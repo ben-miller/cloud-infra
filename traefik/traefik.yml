@@ -1,0 +1,58 @@
+# Traefik Static Configuration
+# Loaded at startup, requires restart to change
+
+# API and Dashboard
+api:
+  dashboard: true
+  insecure: true  # For local development only
+
+# Entry Points
+entryPoints:
+  web:
+    address: ":80"
+    # Uncomment to redirect HTTP to HTTPS
+    # http:
+    #   redirections:
+    #     entryPoint:
+    #       to: websecure
+    #       scheme: https
+
+  # websecure:
+  #   address: ":443"
+
+# Enable ping endpoint for health checks
+ping:
+  entryPoint: "web"
+
+# Providers
+providers:
+  # Docker provider for automatic service discovery
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false  # Require explicit traefik.enable=true label
+    network: "monitoring-network"
+    watch: true
+
+  # File provider for custom dynamic configs
+  file:
+    directory: "/dynamic"
+    watch: true
+
+# Logging
+log:
+  level: INFO  # DEBUG, INFO, WARN, ERROR, FATAL, PANIC
+  format: common  # common, json
+
+# Access Logs (optional, uncomment to enable)
+# accessLog:
+#   filePath: "/var/log/traefik/access.log"
+#   format: common
+#   bufferingSize: 100
+
+# Global redirect to HTTPS (uncomment when using TLS)
+# http:
+#   middlewares:
+#     https-redirect:
+#       redirectScheme:
+#         scheme: https
+#         permanent: true

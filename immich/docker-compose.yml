@@ -20,6 +20,8 @@ services:
       # Do not edit the next line. If you want to change the media storage location on your system, edit the value of UPLOAD_LOCATION in the .env file
       - ${UPLOAD_LOCATION}:/data
       - /etc/localtime:/etc/localtime:ro
+      # External library - existing photos (read-only, no duplication)
+      - /Users/bmiller/photos:/external-library:ro
     env_file:
       - .env
     ports:

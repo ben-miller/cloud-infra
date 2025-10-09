@@ -7,3 +7,16 @@ services:
     ports:
       - "8081:80"
     restart: unless-stopped
+    networks:
+      - default
+      - monitoring-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homepage.rule=Host(`homepage.home.local`)"
+      - "traefik.http.routers.homepage.entrypoints=web"
+      - "traefik.http.services.homepage.loadbalancer.server.port=80"
+      - "traefik.docker.network=monitoring-network"
+
+networks:
+  monitoring-network:
+    external: true

@@ -21,7 +21,7 @@ services:
       - ${UPLOAD_LOCATION}:/data
       - /etc/localtime:/etc/localtime:ro
       # External library - existing photos (read-only, no duplication)
-      - /Users/bmiller/photos:/external-library:ro
+      #- /Volumes/SanDisk2TB/photos:/external-library:ro
     env_file:
       - .env
     ports:
